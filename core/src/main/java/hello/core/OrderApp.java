@@ -22,10 +22,11 @@ public class OrderApp {
         Order order = orderService.createOrder(memberId, "itemA", 10000);
 
         // soutv
-        System.out.println("order = " + order);
+        System.out.println("order = " + order); // order의 toString출력
         System.out.println("order.calculatePrice = " + order.calculatePrice());
         // 출력 결과
         // order = Order{memberId=1, itemName='itemA', itemPrice=10000, discountPrice=1000}
+        // order.calculatePrice = 9000
 
 
 
