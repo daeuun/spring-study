@@ -3,12 +3,16 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository(); // 회원정보 랑
-    private DiscountPolicy discountPolicy; // final은 무조건 값이 할당되어야 함.
+    private final MemberRepository memberRepository; // 회원정보 랑
+    private final DiscountPolicy discountPolicy; // final은 무조건 값이 할당되어야 함.
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
