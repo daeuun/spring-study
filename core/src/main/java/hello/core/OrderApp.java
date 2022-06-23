@@ -3,16 +3,19 @@ package hello.core;
 import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
-import hello.core.member.MemberServiceImpl;
 import hello.core.order.Order;
 import hello.core.order.OrderService;
-import hello.core.order.OrderServiceImpl;
 
 public class OrderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl(memberRepository);
-        OrderService orderService = new OrderServiceImpl(memberRepository, discountPolicy);
+
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
+
+        //MemberService memberService = new MemberServiceImpl(memberRepository);
+        //OrderService orderService = new OrderServiceImpl(memberRepository, discountPolicy);
 
         Long memberId = 1L;
         //new Member(memberId, "memberA", Grade.VIP); 까지 쓰고 option+commend+V

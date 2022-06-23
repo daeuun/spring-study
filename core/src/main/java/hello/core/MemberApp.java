@@ -9,7 +9,12 @@ public class MemberApp {
 
     // 순수한 자바로만 개발중.....
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl(memberRepository);
+
+        // MemberServiceImpl 을 직접 생성하던걸 AppConfig를 통해서 생성한다.
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+
+        //MemberService memberService = new MemberServiceImpl(memberRepository);
         // new Member 작성한 다음에, Member 에 둔 커서 두고 커맨드+옵션+V 하면 자동으로 생성해줌.
         Member member = new Member(1L, "memberA", Grade.VIP);
 
