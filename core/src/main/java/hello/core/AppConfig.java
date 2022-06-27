@@ -1,6 +1,9 @@
 package hello.core;
 
+import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
+import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
@@ -9,12 +12,21 @@ import hello.core.order.OrderServiceImpl;
 
 public class AppConfig {
 
-    // private final MemberRepository memberRepository = new MemoryMemberRepository(); // 직접 구현체를 지정하던 것을 여기서 하자
+    // 리팩터링 후 : 메서드명과 리턴 타입만 보면 역할을 알 수 있다.
     public MemberService memberService() {
-        return new MemberServiceImpl(new MemoryMemberRepository()); // 생성자 주입 : 생성자를 통해 객체가 생성된게 들어감
+        return new MemberServiceImpl(memberRepository()); // 생성자 주입 : 생성자를 통해 객체가 생성된게 들어감
+    }
+
+    private MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
     }
 
     public OrderService orderService() {
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    public DiscountPolicy discountPolicy() {
+        return new RateDiscountPolicy(); // 할인 정책에 대해서 변경하고 싶으면 딱 요기만 변경하면 됨!!
+        //return new FixDiscountPolicy();
     }
 }
