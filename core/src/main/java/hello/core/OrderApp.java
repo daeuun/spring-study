@@ -23,7 +23,6 @@ public class OrderApp {
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
         OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
 
-
         Long memberId = 1L;
         //new Member(memberId, "memberA", Grade.VIP); 까지 쓰고 option+commend+V
         Member member = new Member(memberId, "memberA", Grade.VIP);// VIP 회원 한명 만듦
@@ -37,8 +36,5 @@ public class OrderApp {
         // 출력 결과
         // order = Order{memberId=1, itemName='itemA', itemPrice=10000, discountPrice=1000}
         // order.calculatePrice = 9000
-
-
-
     }
 }
